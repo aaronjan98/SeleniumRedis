@@ -16,8 +16,8 @@ This is an example of using Selenium with Redis and Flask. The purpose of this i
  6. Run `pip install -r requirements.txt`to install the requirements/dependencies for this project
  7. Now, we can start the servers. **You'll need 3 terminal windows which are in the virtual environment.** 
  8. First terminal window, run `flask run`(starts Flask server to handle requests and add tasks to queue)
- 9. Second, run `python red.py`(starts Redis worker to listen and queue tasks based on requests sent)
- 10. Third, run `redis-server`(starts Redis server) 
+ 9. Second, run `redis-server`(starts Redis server) 
+ 10. Third, run `python red.py`(starts Redis worker to listen and queue tasks based on requests sent)
 
 From this point, you can use Postman or an application of your choice to hit the flask API endpoints. 
 
