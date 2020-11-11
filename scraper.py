@@ -30,7 +30,7 @@ class Scraper():
     def __init__(self):
       self.driver = attachToSession()
 
-    def getTA(self):
+    def getGithub(self):
       try:
         driver = self.driver
         driver.get('https://github.com/')
@@ -58,6 +58,7 @@ class Scraper():
 
 def attachToSession():
     # Code Reference : https://stackoverflow.com/a/48194907/11217153
+    # The stackover flow answer was adapted. 
     f = open("sessioninfo.txt", "r")
     lines = f.readlines()
     url = lines[0]
