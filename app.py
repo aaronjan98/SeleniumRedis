@@ -31,3 +31,6 @@ def run_TA():
     job = q.enqueue(Scraper().getTA)
     print(job.get_id())
     return 'OK'
+
+if __name__ == '__main__':
+    app.run(debug=True, use_reloader=True)
