@@ -16,7 +16,7 @@ q = Queue(connection=conn)
 # Run Downloader
 @app.route('/run')
 def run():
-    job = q.enqueue(tester.run)
+    job = q.enqueue(tester.run())
     print(job.get_id())
     return 'OK'
 
@@ -27,8 +27,8 @@ def run_stack():
     return 'OK'
 
 @app.route('/run3')
-def run_TA():
-    job = q.enqueue(Scraper().getTA)
+def run_Github():
+    job = q.enqueue(Scraper().getGithub)
     print(job.get_id())
     return 'OK'
 

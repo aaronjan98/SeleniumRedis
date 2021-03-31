@@ -6,9 +6,10 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.command import Command
 import http.client
 import socket
-
+import requests
 
 def run():
+    print('run()')
     chromeOptions = Options()
     global driver
     driver = webdriver.Chrome(ChromeDriverManager().install(), options=chromeOptions)
@@ -29,14 +30,11 @@ def writeSession(driver):
 class Scraper():
     def __init__(self):
       self.driver = attachToSession()
-
+    
     def getGithub(self):
       try:
         driver = self.driver
-        driver.get('https://github.com/')
-        print('Sleeping..')
-        time.sleep(10)
-        print('Sleep done..')
+        driver.get('https://github.com/aaronjan98')
         return 200
       except Exception as e:
         print(e)
@@ -64,7 +62,12 @@ def attachToSession():
     url = lines[0]
     session_id = lines[1]
     session_id.strip()
+    options = Options()
+    options.add_argument("--disable-infobars")
+    options.add_argument("--enable-file-cookies")
+    capabilities = options.to_capabilities()
     original_execute = WebDriver.execute
+
     def new_command_execute(self, command, params=None):
         if command == "newSession":
             # Mock the response
@@ -73,7 +76,7 @@ def attachToSession():
             return original_execute(self, command, params)
     # Patch the function before creating the driver object
     WebDriver.execute = new_command_execute
-    driver = webdriver.Remote(command_executor=url, desired_capabilities={})
+    driver = webdriver.Remote(command_executor=url, desired_capabilities=capabilities)
     driver.session_id = session_id
     # Replace the patched function with original function
     WebDriver.execute = original_execute
